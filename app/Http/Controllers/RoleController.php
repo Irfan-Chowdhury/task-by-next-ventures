@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Permission\PermissionStoreRequest;
-use App\Http\Requests\Permission\PermissionUpdateRequest;
-use App\Services\PermissionService;
+use App\Http\Requests\Role\RoleStoreRequest;
+use App\Http\Requests\Role\RoleUpdateRequest;
+use App\Services\RoleService;
 use App\Traits\ResponseTrait;
 use Exception;
 
-class PermissionController extends Controller
+class RoleController extends Controller
 {
     use ResponseTrait;
-
-    public function __construct(private PermissionService $permissionService){}
+    
+    public function __construct(private RoleService $roleService){}
 
     public function index()
     {
-        $data = $this->permissionService->getAllPermissions();
+        $data = $this->roleService->getAllRoles();
 
         return $this->sendResponse($data);
     }
 
-    public function store(PermissionStoreRequest $request)
+    public function store(RoleStoreRequest $request)
     {
         try {
-            $data = $this->permissionService->createPermission($request->validated());
+            $data = $this->roleService->createRole($request->validated());
 
             return $this->sendResponse($data,'Data Saved Successfully');
 
@@ -38,7 +38,7 @@ class PermissionController extends Controller
     {
         try {
 
-            $show = $this->permissionService->showPermission($id);
+            $show = $this->roleService->showRole($id);
 
             return $this->sendResponse($show);
 
@@ -48,11 +48,11 @@ class PermissionController extends Controller
         }
     }
 
-    public function update(int $id, PermissionUpdateRequest $request)
+    public function update(int $id, RoleUpdateRequest $request)
     {
         try {
 
-            $data = $this->permissionService->updatePermission($id, $request->validated());
+            $data = $this->roleService->updateRole($id, $request->validated());
 
             return $this->sendResponse($data, 'Data Updated Successfully');
 
@@ -67,7 +67,7 @@ class PermissionController extends Controller
     {
         try {
 
-            $this->permissionService->deletePermission($id);
+            $this->roleService->deleteRole($id);
 
             return $this->sendResponse( [],'Data Deleted Successfully');
 
