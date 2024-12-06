@@ -17,9 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-// });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -34,3 +31,4 @@ Route::middleware('auth:api')->group(function () {
 Route::get('/users', [UserController::class, 'index']);
 Route::apiResource('/permissions',PermissionController::class);
 Route::apiResource('/roles',RoleController::class);
+Route::post('/assign-permissions-to-role',[RoleController::class, 'assignPermissionsToRole']);

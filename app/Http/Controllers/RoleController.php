@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Role\PermissionAssignRequest;
 use App\Http\Requests\Role\RoleStoreRequest;
 use App\Http\Requests\Role\RoleUpdateRequest;
 use App\Services\RoleService;
 use App\Traits\ResponseTrait;
 use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
     use ResponseTrait;
-    
+
     public function __construct(private RoleService $roleService){}
 
     public function index()
@@ -70,6 +74,20 @@ class RoleController extends Controller
             $this->roleService->deleteRole($id);
 
             return $this->sendResponse( [],'Data Deleted Successfully');
+
+        } catch (Exception $e) {
+
+            return $this->sendError($e->getMessage());
+        }
+    }
+
+    public function assignPermissionsToRole(PermissionAssignRequest $request): JsonResponse
+    {
+        try {
+
+            $roleWithPermissions = $this->roleService->setPermissionsToRole($request->role_name, $request->permission_names);
+
+            return $this->sendResponse( $roleWithPermissions,'Permissions assigned successfully');
 
         } catch (Exception $e) {
 

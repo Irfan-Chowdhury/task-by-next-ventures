@@ -42,4 +42,13 @@ class RoleService
         return $this->roleRepository->delete($id);
     }
 
+    public function setPermissionsToRole(string $RoleName, array $permissionNames): ?object
+    {
+        $role = $this->roleRepository->findByName($RoleName);
+
+        $role->syncPermissions($permissionNames);
+
+        return $this->roleRepository->showRoleWithPermissions($RoleName);
+    }
+
 }

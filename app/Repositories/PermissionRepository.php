@@ -18,7 +18,7 @@ class PermissionRepository implements BaseContract
     }
     public function all(): Collection
     {
-        return $this->model->all();
+        return $this->model->select('id','name')->get();
     }
 
     public function create(array $data): object

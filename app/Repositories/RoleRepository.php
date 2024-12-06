@@ -18,7 +18,7 @@ class RoleRepository implements BaseContract
     }
     public function all(): Collection
     {
-        return $this->model->all();
+        return $this->model->select('id','name')->get();
     }
 
     public function create(array $data): object
@@ -50,5 +50,15 @@ class RoleRepository implements BaseContract
         }
 
         return false;
+    }
+
+    public function findByName(string $roleName): ?object
+    {
+        return $this->model->findByName($roleName, 'api');
+    }
+
+    public function showRoleWithPermissions(string $roleName): ?object
+    {
+        return $this->model->select('id','name')->with('permissions:id,name')->where('name', $roleName)->first();
     }
 }
