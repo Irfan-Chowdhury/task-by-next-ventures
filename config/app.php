@@ -159,7 +159,8 @@ return [
         /*
          * Package Service Providers...
          */
-         Spatie\Permission\PermissionServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+        Irfan\RepositoryMaker\RepositoryServiceProvider::class,
 
         /*
          * Application Service Providers...
