@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Http\Resources\RoleResource;
 use App\Repositories\RoleRepository;
 
 class RoleService
@@ -24,17 +25,27 @@ class RoleService
             'guard_name' => 'api',
         ];
 
-        return $this->roleRepository->create($data);
+        $role = $this->roleRepository->create($data);
+
+        return new RoleResource($role);
+
     }
 
     public function showRole(int $id): object
     {
-        return $this->roleRepository->findById($id);
+        $role = $this->roleRepository->findById($id);
+
+        $role->load('permissions');
+
+        return new RoleResource($role);
     }
 
     public function updateRole(int $id, array $data): object|null
     {
-        return $this->roleRepository->update($id, $data);
+        $role = $this->roleRepository->update($id, $data);
+
+        return new RoleResource($role);
+
     }
 
     public function deleteRole(int $id)

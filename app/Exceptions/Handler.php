@@ -32,13 +32,13 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        $env = app()->environment(); 
+        $env = app()->environment();
 
         // Handle Forbidden Exception (403)
         if ($exception instanceof HttpException && $exception->getStatusCode() === 403) {
             return response()->json([
                 'success' => false,
-                'message' => $env === 'local' ? 'Access Denied' : 'Forbidden',
+                'message' => $env === 'local' ? '403 | Unauthorized' : 'Forbidden',
             ], 403);
         }
 
@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ModelNotFoundException) {
             return response()->json([
                 'success' => false,
-                'message' => $env === 'local' ? 'Resource not found' : 'Not Found',
+                'message' => $env === 'local' ? '404 | Resource not found' : 'Not Found',
             ], 404);
         }
 

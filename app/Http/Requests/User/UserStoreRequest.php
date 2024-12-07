@@ -3,27 +3,14 @@
 namespace App\Http\Requests\User;
 
 
+use App\Traits\FailedValidation;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserStoreRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    protected function failedValidation(Validator $validator)
-    {
-        if ($this->is('api/*') || $this->expectsJson()) {
-            throw new HttpResponseException(
-                response()->json(['errors' => $validator->errors()], 422)
-            );
-        }
-
-        parent::failedValidation($validator);
-    }
+    use FailedValidation;
 
     public function rules(): array
     {
@@ -33,7 +20,8 @@ class UserStoreRequest extends FormRequest
             'email' => 'required|email|unique:users,email',
             'address' => 'required|string',
             'password' => 'required|min:5|confirmed',
-            'role_name' => 'required|string|exists:roles,name',
+            'role_names' => 'required|array',
+            'role_names.*' => 'string|exists:roles,name',
         ];
     }
 }

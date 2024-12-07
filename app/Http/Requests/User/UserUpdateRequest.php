@@ -17,7 +17,7 @@ class UserUpdateRequest extends FormRequest
             'email' => 'required|email|unique:users,email,'. $this->id,
             'address' => 'required|string',
             'password' => 'min:5|confirmed',
-            'role_name' => 'required|string|exists:roles,name',
-        ];
+            'role_names' => 'required|array',
+            'role_names.*' => 'string|exists:roles,name',        ];
     }
 }

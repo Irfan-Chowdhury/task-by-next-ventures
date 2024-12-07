@@ -17,22 +17,6 @@ class PermissionSeeder extends Seeder
 
         $data = [
             [
-                'name' => 'role-view',
-                'guard_name' => $guardName,
-            ],
-            [
-                'name' => 'role-store',
-                'guard_name' => $guardName,
-            ],
-            [
-                'name' => 'role-edit',
-                'guard_name' => $guardName,
-            ],
-            [
-                'name' => 'role-delete',
-                'guard_name' => $guardName,
-            ],
-            [
                 'name' => 'permission-view',
                 'guard_name' => $guardName,
             ],
@@ -41,11 +25,43 @@ class PermissionSeeder extends Seeder
                 'guard_name' => $guardName,
             ],
             [
-                'name' => 'permission-edit',
+                'name' => 'permission-update',
                 'guard_name' => $guardName,
             ],
             [
                 'name' => 'permission-delete',
+                'guard_name' => $guardName,
+            ],
+            [
+                'name' => 'role-view',
+                'guard_name' => $guardName,
+            ],
+            [
+                'name' => 'role-store',
+                'guard_name' => $guardName,
+            ],
+            [
+                'name' => 'role-update',
+                'guard_name' => $guardName,
+            ],
+            [
+                'name' => 'role-delete',
+                'guard_name' => $guardName,
+            ],
+            [
+                'name' => 'user-view',
+                'guard_name' => $guardName,
+            ],
+            [
+                'name' => 'user-store',
+                'guard_name' => $guardName,
+            ],
+            [
+                'name' => 'user-update',
+                'guard_name' => $guardName,
+            ],
+            [
+                'name' => 'user-delete',
                 'guard_name' => $guardName,
             ],
         ];

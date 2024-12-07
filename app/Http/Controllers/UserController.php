@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
+use App\Models\User;
 use App\Services\UserService;
 use App\Traits\ResponseTrait;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -28,6 +32,7 @@ class UserController extends Controller
 
     public function store(UserStoreRequest $request)
     {
+
         try {
             $data = $this->userService->createUser($request->validated());
 

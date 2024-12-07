@@ -31,19 +31,18 @@ final Class UserService
 
         $user = $this->userRepository->create($newData);
 
-        if (isset($data['role_name'])) {
-
-            $role = $this->roleRepository->findByName($data['role_name']);
-
-            $user->assignRole($role);
-        }
+        $user->assignRole($data['role_names']);
 
         return $user;
     }
 
     public function showUser(int $id): object
     {
-        return $this->userRepository->findById($id);
+        $user =  $this->userRepository->findById($id);
+
+        $user->load('roles.permissions');
+
+        return new UserResource($user);
     }
 
     public function updateUser(int $id, array $data): object|null
@@ -56,12 +55,9 @@ final Class UserService
 
         $user = $this->userRepository->update($id, $data);
 
-        if (isset($data['role_name'])) {
+        $user->syncRoles($data['role_names']);
 
-            $role = $this->roleRepository->findByName($data['role_name']);
-
-            $user->syncRoles($role);
-        }
+        $user->load('roles.permissions');
 
         return new UserResource($user);
     }
