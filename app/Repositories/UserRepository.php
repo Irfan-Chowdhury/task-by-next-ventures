@@ -31,7 +31,7 @@ final Class UserRepository implements BaseContract
 
     public function findById(int $id): ?object
     {
-        return $this->model->find($id);
+        return $this->model->findOrFail($id);
     }
 
     public function update(int $id, array $data): ?object

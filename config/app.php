@@ -161,7 +161,7 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         Irfan\RepositoryMaker\RepositoryServiceProvider::class,
-
+        Laravel\Passport\PassportServiceProvider::class,
         /*
          * Application Service Providers...
          */
