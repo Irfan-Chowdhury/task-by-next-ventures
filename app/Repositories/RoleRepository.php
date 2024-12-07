@@ -8,7 +8,7 @@ use App\Contracts\BaseContract;
 use Spatie\Permission\Models\Role;
 use Illuminate\Database\Eloquent\Collection;
 
-class RoleRepository implements BaseContract
+final class RoleRepository implements BaseContract
 {
     protected $model;
 
@@ -33,20 +33,20 @@ class RoleRepository implements BaseContract
 
     public function update(int $id, array $data): ?object
     {
-        $permission = $this->findById($id);
+        $item = $this->findById($id);
 
-        $permission->update($data);
+        $item->update($data);
 
-        return $permission;
+        return $item;
     }
 
 
     public function delete(int $id): bool
     {
-        $permission = $this->findById($id);
+        $item = $this->findById($id);
 
-        if ($permission) {
-            return $permission->delete();
+        if ($item) {
+            return $item->delete();
         }
 
         return false;

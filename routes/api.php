@@ -28,7 +28,8 @@ Route::middleware('auth:api')->group(function () {
     });
 });
 
-Route::get('/users', [UserController::class, 'index']);
+Route::apiResource('/users', UserController::class);
 Route::apiResource('/permissions',PermissionController::class);
 Route::apiResource('/roles',RoleController::class);
 Route::post('/assign-permissions-to-role',[RoleController::class, 'assignPermissionsToRole']);
+// Route::post('/assign-role- ToUser',[RoleController::class, 'assignRoleToUser']);
