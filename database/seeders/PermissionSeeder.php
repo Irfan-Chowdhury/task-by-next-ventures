@@ -21,15 +21,7 @@ class PermissionSeeder extends Seeder
                 'guard_name' => $guardName,
             ],
             [
-                'name' => 'permission-store',
-                'guard_name' => $guardName,
-            ],
-            [
-                'name' => 'permission-update',
-                'guard_name' => $guardName,
-            ],
-            [
-                'name' => 'permission-delete',
+                'name' => 'assign-permission',
                 'guard_name' => $guardName,
             ],
             [
@@ -69,3 +61,17 @@ class PermissionSeeder extends Seeder
         Permission::insert($data);
     }
 }
+
+
+
+// use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+
+// public function update($id, array $data)
+// {
+//     throw new MethodNotAllowedHttpException([], 'Update operation is not supported for Category.');
+// }
+
+// public function delete($id)
+// {
+//     throw new MethodNotAllowedHttpException([], 'Delete operation is not supported for Category.');
+// }

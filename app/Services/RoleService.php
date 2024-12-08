@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Contracts\RoleContract;
 use App\Http\Resources\RoleResource;
-use App\Repositories\RoleRepository;
+// use App\Repositories\RoleRepository;
 
 class RoleService
 {
-    public function __construct(private RoleRepository $roleRepository){}
+    public function __construct(private RoleContract $roleContract){}
 
     public function getAllRoles()
     {
-        $roles = $this->roleRepository->all();
+        $roles = $this->roleContract->all();
 
         return $roles;
     }
@@ -25,7 +26,7 @@ class RoleService
             'guard_name' => 'api',
         ];
 
-        $role = $this->roleRepository->create($data);
+        $role = $this->roleContract->create($data);
 
         return new RoleResource($role);
 
@@ -33,7 +34,7 @@ class RoleService
 
     public function showRole(int $id): object
     {
-        $role = $this->roleRepository->findById($id);
+        $role = $this->roleContract->findById($id);
 
         $role->load('permissions');
 
@@ -42,7 +43,7 @@ class RoleService
 
     public function updateRole(int $id, array $data): object|null
     {
-        $role = $this->roleRepository->update($id, $data);
+        $role = $this->roleContract->update($id, $data);
 
         return new RoleResource($role);
 
@@ -50,16 +51,16 @@ class RoleService
 
     public function deleteRole(int $id)
     {
-        return $this->roleRepository->delete($id);
+        return $this->roleContract->delete($id);
     }
 
     public function setPermissionsToRole(string $RoleName, array $permissionNames): ?object
     {
-        $role = $this->roleRepository->findByName($RoleName);
+        $role = $this->roleContract->findByName($RoleName);
 
         $role->syncPermissions($permissionNames);
 
-        return $this->roleRepository->showRoleWithPermissions($RoleName);
+        return $this->roleContract->showRoleWithPermissions($RoleName);
     }
 
 }

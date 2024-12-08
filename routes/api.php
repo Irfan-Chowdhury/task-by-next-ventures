@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
+
+    Route::get('/permissions',[PermissionController::class, 'index'])->middleware('permission:permission-view');
 
     Route::prefix('/roles')->group(function () {
         Route::controller(RoleController::class)->group(function () {
@@ -42,6 +45,6 @@ Route::middleware('auth:api')->group(function () {
     });
 
 
-    Route::post('/assign-permissions-to-role',[RoleController::class, 'assignPermissionsToRole']);
+    Route::post('/assign-permissions-to-role',[RoleController::class, 'assignPermissionsToRole'])->middleware('permission:assign-permission');
     Route::post('logout', [AuthController::class, 'logout']);
 });

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Contracts\BaseContract;
+use App\Contracts\RoleContract;
 use Spatie\Permission\Models\Role;
 
-final class RoleRepository extends BaseRepository implements BaseContract
+final class RoleRepository extends BaseRepository implements RoleContract
 {
-    public function __construct(Role $model){
+    public function __construct(Role $model)
+    {
         parent::__construct($model);
     }
 
