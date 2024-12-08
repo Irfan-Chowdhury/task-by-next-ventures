@@ -66,16 +66,24 @@ php artisan migrate
 php artisan db:seed
 ```
 
-### 7. Create a personal access token client 
+<!-- ### 7. Create a personal access token client 
 ```bash
 php artisan passport:client --personal
-```
+``` 
 
 After run this command a question will be apeared to select a name for the personal access client. Set a name as your choice.
-
 <img src="https://snipboard.io/hxTBL8.jpg" />
+-->
 
-### 9. Run the development server:
+### 7. Install Laravel Passport:
+```bash
+php artisan passport:install
+```
+After run this command a question will be apeared to grnerate migrate and `personal access`. Screenshot given below - 
+
+<img src="https://snipboard.io/NCEIi5.jpg" />
+
+### 8. Run the development server:
 ```bash
 php artisan serve
 ```
@@ -141,10 +149,23 @@ Here are the available endpoints with their descriptions.
 Please click the [API Documentation](https://documenter.getpostman.com/view/34865364/2sAYBd67NJ) link to check overall details for this User Managemnet API. 
 
 
-<!-- ## Testing with Postman
+## Download Collection & Test with Postman
+Please download this **POSTMAN Collection File** : [Download Now](https://drive.google.com/file/d/1BP1iM5nYQgTKYmqHhNF1MJqocr_m8Q0K/view?usp=sharing)
+
 1. Import the provided Postman collection into your Postman tool.
-2. Update the Authorization Bearer token under the **Authorization** tab.
-3. Test all the endpoints mentioned above. -->
+2. Setup a Environment to use the token for all API request.
+3. Then click on the root folder, open the **Authorization** tab.  
+    - Select **Type:** `Bearer Token` 
+    - In **Token** field, just put the `environment variable`.
+4. Test all the endpoints mentioned above.
+
+Some screenshot given below - 
+
+<img src="https://snipboard.io/sIeQyB.jpg" />
+<br>
+<img src="https://snipboard.io/ibXZeB.jpg" />
+
+
 
 ## Error Handling
 The API includes proper error handling with meaningful HTTP status codes:
