@@ -50,6 +50,16 @@ class Handler extends ExceptionHandler
             ], 404);
         }
 
+        // Handle 500 Internal Server Error
+        // if ($exception instanceof Throwable) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => $env === 'local'
+        //             ? $exception->getMessage()  // Detailed message for debugging
+        //             : 'Internal Server Error',  // Generic message for production
+        //     ], 500);
+        // }
+
 
         // Default Response for other exceptions
         return parent::render($request, $exception);

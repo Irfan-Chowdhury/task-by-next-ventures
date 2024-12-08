@@ -4,13 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
-use App\Models\User;
 use App\Services\UserService;
 use App\Traits\ResponseTrait;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -25,7 +21,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $data  = $this->userService->getAllUsers();
+        $data = $this->userService->getAllUsers();
 
         return $this->sendResponse($data);
     }
@@ -36,7 +32,7 @@ class UserController extends Controller
         try {
             $data = $this->userService->createUser($request->validated());
 
-            return $this->sendResponse($data,'Data Saved Successfully');
+            return $this->sendResponse($data, 'Data Saved Successfully');
 
         } catch (Exception $e) {
 
@@ -44,11 +40,11 @@ class UserController extends Controller
         }
     }
 
-    public function show(int $id)
+    public function show(int $userId)
     {
         try {
 
-            $show = $this->userService->showUser($id);
+            $show = $this->userService->showUser($userId);
 
             return $this->sendResponse($show);
 
@@ -58,12 +54,11 @@ class UserController extends Controller
         }
     }
 
-
-    public function update(int $id, UserUpdateRequest $request)
+    public function update(int $userId, UserUpdateRequest $request)
     {
         try {
 
-            $data = $this->userService->updateUser($id, $request->validated());
+            $data = $this->userService->updateUser($userId, $request->validated());
 
             return $this->sendResponse($data, 'Data Updated Successfully');
 
@@ -73,13 +68,13 @@ class UserController extends Controller
         }
     }
 
-    public function destroy(int $id)
+    public function destroy(int $userId)
     {
         try {
 
-            $this->userService->deleteUser($id);
+            $this->userService->deleteUser($userId);
 
-            return $this->sendResponse( [],'Data Deleted Successfully');
+            return $this->sendResponse([], 'Data Deleted Successfully');
 
         } catch (Exception $e) {
 

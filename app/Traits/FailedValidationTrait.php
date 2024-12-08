@@ -5,15 +5,14 @@ namespace App\Traits;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-trait FailedValidation
+trait FailedValidationTrait
 {
-
     public function authorize(): bool
     {
         return true;
     }
-    
-    protected function failedValidation(Validator $validator)
+
+    protected function FailedValidationTrait(Validator $validator)
     {
         if ($this->is('api/*') || $this->expectsJson()) {
             throw new HttpResponseException(
@@ -21,6 +20,6 @@ trait FailedValidation
             );
         }
 
-        parent::failedValidation($validator);
+        parent::FailedValidationTrait($validator);
     }
 }

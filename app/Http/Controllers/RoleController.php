@@ -9,14 +9,12 @@ use App\Services\RoleService;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
     use ResponseTrait;
 
-    public function __construct(private RoleService $roleService){}
+    public function __construct(private RoleService $roleService) {}
 
     public function index()
     {
@@ -30,7 +28,7 @@ class RoleController extends Controller
         try {
             $data = $this->roleService->createRole($request->validated());
 
-            return $this->sendResponse($data,'Data Saved Successfully');
+            return $this->sendResponse($data, 'Data Saved Successfully');
 
         } catch (Exception $e) {
 
@@ -38,11 +36,11 @@ class RoleController extends Controller
         }
     }
 
-    public function show(int $id)
+    public function show(int $roleId)
     {
         try {
 
-            $show = $this->roleService->showRole($id);
+            $show = $this->roleService->showRole($roleId);
 
             return $this->sendResponse($show);
 
@@ -52,11 +50,11 @@ class RoleController extends Controller
         }
     }
 
-    public function update(int $id, RoleUpdateRequest $request)
+    public function update(int $roleId, RoleUpdateRequest $request)
     {
         try {
 
-            $data = $this->roleService->updateRole($id, $request->validated());
+            $data = $this->roleService->updateRole($roleId, $request->validated());
 
             return $this->sendResponse($data, 'Data Updated Successfully');
 
@@ -67,13 +65,13 @@ class RoleController extends Controller
 
     }
 
-    public function destroy(int $id)
+    public function destroy(int $roleId)
     {
         try {
 
-            $this->roleService->deleteRole($id);
+            $this->roleService->deleteRole($roleId);
 
-            return $this->sendResponse( [],'Data Deleted Successfully');
+            return $this->sendResponse([], 'Data Deleted Successfully');
 
         } catch (Exception $e) {
 
@@ -87,7 +85,7 @@ class RoleController extends Controller
 
             $roleWithPermissions = $this->roleService->setPermissionsToRole($request->role_name, $request->permission_names);
 
-            return $this->sendResponse( $roleWithPermissions,'Permissions assigned successfully');
+            return $this->sendResponse($roleWithPermissions, 'Permissions assigned successfully');
 
         } catch (Exception $e) {
 

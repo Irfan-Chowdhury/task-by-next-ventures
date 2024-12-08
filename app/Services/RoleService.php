@@ -6,17 +6,16 @@ namespace App\Services;
 
 use App\Contracts\RoleContract;
 use App\Http\Resources\RoleResource;
+
 // use App\Repositories\RoleRepository;
 
 class RoleService
 {
-    public function __construct(private RoleContract $roleContract){}
+    public function __construct(private RoleContract $roleContract) {}
 
     public function getAllRoles()
     {
-        $roles = $this->roleContract->all();
-
-        return $roles;
+        return $this->roleContract->all();
     }
 
     public function createRole(array $data): object
@@ -41,7 +40,7 @@ class RoleService
         return new RoleResource($role);
     }
 
-    public function updateRole(int $id, array $data): object|null
+    public function updateRole(int $id, array $data): ?object
     {
         $role = $this->roleContract->update($id, $data);
 
@@ -62,5 +61,4 @@ class RoleService
 
         return $this->roleContract->showRoleWithPermissions($RoleName);
     }
-
 }

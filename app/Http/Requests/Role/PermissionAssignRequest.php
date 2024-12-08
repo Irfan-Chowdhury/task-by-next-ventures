@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Role;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+
 class PermissionAssignRequest extends FormRequest
 {
     public function authorize(): bool
@@ -12,7 +13,7 @@ class PermissionAssignRequest extends FormRequest
         return true;
     }
 
-    protected function failedValidation(Validator $validator)
+    protected function FailedValidationTrait(Validator $validator)
     {
         if ($this->is('api/*') || $this->expectsJson()) {
             throw new HttpResponseException(
@@ -20,7 +21,7 @@ class PermissionAssignRequest extends FormRequest
             );
         }
 
-        parent::failedValidation($validator);  // Use the default behavior for non-API requests
+        parent::FailedValidationTrait($validator);  // Use the default behavior for non-API requests
     }
 
     public function rules(): array

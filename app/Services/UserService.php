@@ -4,32 +4,30 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Contracts\UserContract;
 use App\Http\Resources\UserResource;
-use App\Repositories\RoleRepository;
-use App\Repositories\UserRepository;
 use Illuminate\Support\Str;
 
-final Class UserService
+final class UserService
 {
-
-    public function __construct(public UserRepository $userRepository, private RoleRepository $roleRepository){}
+    public function __construct(public UserContract $userContract) {}
 
     public function getAllUsers()
     {
-        $users = $this->userRepository->all();
+        $users = $this->userContract->all();
 
-        return UserResource::collection($users);
+        return $users;
     }
 
     public function createUser(array $data): object
     {
         $newData = array_merge($data, [
-            'username'=> strtolower(str_replace(' ', '', $data['name'])).'_'.Str::random(6),
-            'password'=> bcrypt($data['password']),
-            'is_active'=> true,
+            'username' => strtolower(str_replace(' ', '', $data['name'])).'_'.Str::random(6),
+            'password' => bcrypt($data['password']),
+            'is_active' => true,
         ]);
 
-        $user = $this->userRepository->create($newData);
+        $user = $this->userContract->create($newData);
 
         $user->assignRole($data['role_names']);
 
@@ -38,22 +36,22 @@ final Class UserService
 
     public function showUser(int $id): object
     {
-        $user =  $this->userRepository->findById($id);
+        $user = $this->userContract->findById($id);
 
         $user->load('roles.permissions');
 
         return new UserResource($user);
     }
 
-    public function updateUser(int $id, array $data): object|null
+    public function updateUser(int $id, array $data): ?object
     {
         if (isset($data['password'])) {
             $data = array_merge($data, [
-                'password'=> bcrypt($data['password']),
+                'password' => bcrypt($data['password']),
             ]);
         }
 
-        $user = $this->userRepository->update($id, $data);
+        $user = $this->userContract->update($id, $data);
 
         $user->syncRoles($data['role_names']);
 
@@ -64,6 +62,6 @@ final Class UserService
 
     public function deleteUser(int $id)
     {
-        return $this->userRepository->delete($id);
+        return $this->userContract->delete($id);
     }
 }

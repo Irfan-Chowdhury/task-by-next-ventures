@@ -8,12 +8,12 @@ trait ResponseTrait
 {
     public function sendResponse($result, $message = null)
     {
-    	$response = [
+        $response = [
             'success' => true,
-            'result'  => $result,
+            'result' => $result,
         ];
 
-        if($message){
+        if ($message) {
             $response['message'] = $message;
         }
 
@@ -22,7 +22,7 @@ trait ResponseTrait
 
     public function sendError($errorMessages, $code = 500)
     {
-    	$response = [
+        $response = [
             'success' => false,
             'errors' => $errorMessages,
         ];
@@ -30,4 +30,3 @@ trait ResponseTrait
         return response()->json($response, $code);
     }
 }
-

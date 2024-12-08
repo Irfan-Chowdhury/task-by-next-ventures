@@ -2,22 +2,23 @@
 
 namespace App\Http\Requests\User;
 
-use App\Traits\FailedValidation;
+use App\Traits\FailedValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserUpdateRequest extends FormRequest
 {
-    use FailedValidation;
+    use FailedValidationTrait;
 
     public function rules(): array
     {
         return [
             'name' => 'required|string',
             'phone' => 'required|numeric',
-            'email' => 'required|email|unique:users,email,'. $this->id,
+            'email' => 'required|email|unique:users,email,'.$this->id,
             'address' => 'required|string',
             'password' => 'min:5|confirmed',
             'role_names' => 'required|array',
-            'role_names.*' => 'string|exists:roles,name',        ];
+            'role_names.*' => 'string|exists:roles,name'
+        ];
     }
 }

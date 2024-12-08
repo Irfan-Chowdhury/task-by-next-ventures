@@ -29,7 +29,7 @@ Route::middleware('auth:api')->group(function () {
             Route::get('/', 'index')->middleware('permission:role-view');
             Route::post('/', 'store')->middleware('permission:role-store');
             Route::get('/{id}', 'show')->middleware('permission:role-view');
-            Route::patch('/{id}', 'update')->middleware('permission:role-edit');
+            Route::patch('/{id}', 'update')->middleware('permission:role-update');
             Route::delete('/{id}', 'destroy')->middleware('permission:role-delete');
         });
     });
@@ -39,7 +39,7 @@ Route::middleware('auth:api')->group(function () {
             Route::get('/', 'index')->middleware('permission:user-view');
             Route::post('/', 'store')->middleware('permission:user-store');
             Route::get('/{user}', 'show')->middleware('permission:user-view');
-            Route::patch('/{user}', 'update')->middleware('permission:user-edit');
+            Route::patch('/{user}', 'update')->middleware('permission:user-update');
             Route::delete('/{user}', 'destroy')->middleware('permission:user-delete');
         });
     });

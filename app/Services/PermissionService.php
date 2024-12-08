@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Repositories\PermissionRepository;
+use App\Contracts\PermissionContract;
+use App\Http\Resources\PermissionResource;
 
 class PermissionService
 {
-    public function __construct(private PermissionRepository $permissionRepository){}
+    public function __construct(private PermissionContract $permissionContract) {}
 
     public function getAllPermissions()
     {
-        $permissions = $this->permissionRepository->all();
+        $permissions = $this->permissionContract->all();
 
-        return $permissions;
+        return PermissionResource::collection($permissions);
     }
 }

@@ -26,7 +26,7 @@ A RESTful API built using Laravel and **Laravel Passport** for secure token-base
 - **Testing:** Postman for API Testing
 
 
-## Project Installation Steps
+## Project Installation Guideline
 
 ### 1. Clone the Project
 ```bash
@@ -51,7 +51,7 @@ composer install
     DB_PASSWORD=your_password
     ```
 
-### 4. Generate application key:: 
+### 4. Generate application key:
 ```bash
 php artisan key:generate
 ```
@@ -61,19 +61,14 @@ php artisan key:generate
 php artisan migrate
 ```
 
-### 6. Install Laravel Passport: 
-```bash
-php artisan passport:install
-```
-
-### 7. Seeder 
+### 6. Seeder 
 ```bash
 php artisan db:seed
 ```
 
-### 8. Create a personal access token client 
+### 7. Create a personal access token client 
 ```bash
-php artisan  passport:client --personal
+php artisan passport:client --personal
 ```
 
 After run this command a question will be apeared to select a name for the personal access client. Set a name as your choice.
@@ -142,11 +137,14 @@ Here are the available endpoints with their descriptions.
 | GET      | `/api/assign-permissions-to-role` | Assign selected permissions into a Specific Role|
 
 
+## API Documentation
+Please click the [API Documentation](https://documenter.getpostman.com/view/34865364/2sAYBd67NJ) link to check overall details for this User Managemnet API. 
 
-## Testing with Postman
+
+<!-- ## Testing with Postman
 1. Import the provided Postman collection into your Postman tool.
 2. Update the Authorization Bearer token under the **Authorization** tab.
-3. Test all the endpoints mentioned above.
+3. Test all the endpoints mentioned above. -->
 
 ## Error Handling
 The API includes proper error handling with meaningful HTTP status codes:

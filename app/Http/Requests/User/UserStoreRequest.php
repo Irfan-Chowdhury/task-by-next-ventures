@@ -2,15 +2,12 @@
 
 namespace App\Http\Requests\User;
 
-
-use App\Traits\FailedValidation;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Traits\FailedValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserStoreRequest extends FormRequest
 {
-    use FailedValidation;
+    use FailedValidationTrait;
 
     public function rules(): array
     {

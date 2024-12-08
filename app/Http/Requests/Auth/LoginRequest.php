@@ -2,13 +2,13 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Traits\FailedValidation;
+use App\Traits\FailedValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
-    use FailedValidation;
-    
+    use FailedValidationTrait;
+
     public function rules(): array
     {
         return [

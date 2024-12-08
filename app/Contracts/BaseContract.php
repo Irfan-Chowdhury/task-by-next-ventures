@@ -15,5 +15,6 @@ interface BaseContract
     public function findById(int $id): ?object;
 
     public function update(int $id, array $data): ?object;
+
     public function delete(int $id): bool;
 }

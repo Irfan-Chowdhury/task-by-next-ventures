@@ -21,6 +21,6 @@ final class RoleRepository extends BaseRepository implements RoleContract
 
     public function showRoleWithPermissions(string $roleName): ?object
     {
-        return $this->model->select('id','name')->with('permissions:id,name')->where('name', $roleName)->first();
+        return $this->model->select('id', 'name')->with('permissions:id,name')->where('name', $roleName)->first();
     }
 }

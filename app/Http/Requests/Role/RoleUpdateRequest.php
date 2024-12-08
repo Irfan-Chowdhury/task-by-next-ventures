@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Role;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class RoleUpdateRequest extends FormRequest
@@ -13,7 +13,7 @@ class RoleUpdateRequest extends FormRequest
         return true;
     }
 
-    protected function failedValidation(Validator $validator)
+    protected function FailedValidationTrait(Validator $validator)
     {
         if ($this->is('api/*') || $this->expectsJson()) {
             throw new HttpResponseException(
@@ -21,13 +21,13 @@ class RoleUpdateRequest extends FormRequest
             );
         }
 
-        parent::failedValidation($validator);
+        parent::FailedValidationTrait($validator);
     }
 
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:roles,name,' . $this->id
+            'name' => 'required|string|unique:roles,name,'.$this->id,
         ];
     }
 }
