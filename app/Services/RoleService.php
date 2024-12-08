@@ -7,8 +7,6 @@ namespace App\Services;
 use App\Contracts\RoleContract;
 use App\Http\Resources\RoleResource;
 
-// use App\Repositories\RoleRepository;
-
 class RoleService
 {
     public function __construct(private RoleContract $roleContract) {}
